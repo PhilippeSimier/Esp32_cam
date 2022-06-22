@@ -4,6 +4,7 @@
     <df root="." name="0">
       <df name="src">
         <in>main.cpp</in>
+        <in>settings.h</in>
       </df>
       <in>platformio.ini</in>
     </df>
@@ -540,6 +541,8 @@
       <item path="platformio.ini" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/settings.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

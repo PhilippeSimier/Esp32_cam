@@ -8,6 +8,7 @@
       </df>
       <df name="src">
         <in>main.cpp</in>
+        <in>settings.h</in>
       </df>
       <df name="test">
       </df>

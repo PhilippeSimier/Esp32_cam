@@ -18,12 +18,14 @@
 
 // ledPin refers to ESP32-CAM GPIO 4 (flashlight)
 #define FLASH_GPIO_NUM 4
+#define LED_ROUGE 33
 
 void setup() {
     Serial.begin(115200);
     
     Serial.println("test led flash attention les yeux !!!");
     pinMode(FLASH_GPIO_NUM, OUTPUT);
+    pinMode(LED_ROUGE, OUTPUT);
 
     digitalWrite(FLASH_GPIO_NUM, HIGH);
     delay(2000);
@@ -33,7 +35,10 @@ void setup() {
 
 void loop() {
     
-    
+    digitalWrite(LED_ROUGE, HIGH);
+    delay(1000);
+    digitalWrite(LED_ROUGE, LOW);
+    delay(1000);
     
 }
 
