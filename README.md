@@ -5,7 +5,7 @@ Ce dépôt propose des programmes pour tester la carte esp32-cam.
 
 ![ESP32-cam](/img/board_ESP32_cam.png)
 
-Les programmes sont développés sous linux mint avec netbeans et platformio.
+Les programmes sont développés sous Linux Mint avec Netbeans et Platformio.
 
 ## Tests de la led flash et de la liaison série
 
@@ -68,4 +68,6 @@ Pour enregistrer l'image JPEG sur la carte SD, il suffit d'écrire le contenu du
 	file.write(fb->buf, fb->len);
 ```
 
-```esp_camera_fb_return(fb); ``` renvoie le tampon de trame afin qu'il puisse être réutilisé
+```esp_camera_fb_return(fb); ``` libère la mémoire tampon afin qu'elle puisse être réutilisée.
+
+![philippe](/img/picture7.jpg)
