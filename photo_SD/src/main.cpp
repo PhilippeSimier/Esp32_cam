@@ -79,11 +79,9 @@ void capturePhotoSaveSD(void) {
     // Path where new picture will be saved in SD Card
 
     String path = "/picture" + String(count) + ".jpg";
-
-    fs::FS &fs = SD_MMC;
     Serial.printf("Picture file name: %s\n", path.c_str());
 
-    File file = fs.open(path.c_str(), FILE_WRITE);
+    File file = SD_MMC.open(path.c_str(), FILE_WRITE);
     if (!file) {
         Serial.println("Failed to open file in writing mode");
     } else {
