@@ -50,4 +50,8 @@ Remarque La lampe ne s’allumera pas lors des écritures sur la carte SD.
 ## Lampe  (GPIO 4)
 L'ESP32-CAM dispose d'une LED intégrée très lumineuse qui peut fonctionner comme un flash lors de la prise de  photos. Cette LED est connectée en interne à GPIO 4.
 
+## LED rouge intégrée (GPIO 33)
 
+À côté du bouton RST, il y a une LED rouge intégrée. Cette LED est connectée en interne àGPIO 33. on peut utiliser cette LED pour indiquer que quelque chose se passe.
+
+Cette LED fonctionne avec une logique inversée, donc vous envoyez un état LOW pour l'allumer et un état HIGHl pour l'éteindre.
