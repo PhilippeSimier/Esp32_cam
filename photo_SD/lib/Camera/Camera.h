@@ -34,8 +34,6 @@
 #define PCLK_GPIO_NUM 22
 #define FLASH_GPIO_NUM 4
 
-// ledPin refers to ESP32-CAM GPIO 4 (flashlight)
-#define FLASH_GPIO_NUM 4
 #define LED_ROUGE 33
 
 
