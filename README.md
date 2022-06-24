@@ -7,6 +7,17 @@ Ce dépôt propose des programmes pour tester la carte esp32-cam.
 
 Les programmes sont développés sous Linux Mint avec Netbeans et Platformio.
 
+## ### Camera Specifications
+
+L'ESP32-CAM comprend une caméra **OV2640**. La carte prend également en charge la caméra OV7670.
+
+L'**OV2640** a les spécifications suivantes :
+
+-   2 Megapixel sensor
+-   Array size UXGA 1622×1200
+-   Output formats include YUV422, YUV420, RGB565, RGB555 and JPEG
+-   Image transfer rate of 15 to 60 fps
+
 ## Tests de la led flash et de la liaison série
 
 **La liaison série ne fonctionne pas avec putty** (problème avec les ligne dtr et rts).
@@ -23,11 +34,11 @@ La LED blanche est liée à la broche GPIO 4.
 
 le fichier ``` esp_camera.h``` : donne le prototype des fonctions pour initialiser la caméra et en obtenir des images.
 
-Lorsqu'on  capture une image avec la caméra, le tampon d'image la contiendra dans le format sélectionné.
+Lorsqu'on  capture une image avec la caméra, le tampon d'image la contiendra dans le format sélectionné. Attention tous les formats ne sont pas supportés. 
 
- - **GRAYSCALE** signifie des valeurs de 0 à 255 pour chaque pixel
+ - **~~GRAYSCALE~~** **(non supporté)** signifie des valeurs de 0 à 255 pour chaque pixel 
  - **RGB565** signifie qu'une valeur de 16 bits est par pixel et comprend 5 bits de rouge, 6 bits de vert et 5 bits de bleu.  
- - **RGB888** signifie qu'il y a 3 octets par pixel, un pour le rouge, un pour le vert et un pour le bleu. Chacun varie entre 0 et 255.  
+ - **~~RGB888~~**  **(non supporté)** signifie qu'il y a 3 octets par pixel, un pour le rouge, un pour le vert et un pour le bleu. Chacun varie entre 0 et 255.  
  - **YUV** signifie que chaque pixel a son canal Y comme un octet séparé (0 à 255) et que chacun des deux pixels adjacents partage ses valeurs U et V. 
  -  **JPEG** signifie que l'image est encodée au format JPEG soit par l'appareil photo lui-même.
  

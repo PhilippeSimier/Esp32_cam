@@ -44,8 +44,8 @@ bool Camera::init() {
     config.pin_pwdn = PWDN_GPIO_NUM;
     config.pin_reset = RESET_GPIO_NUM;
     config.xclk_freq_hz = 20000000;
-    config.pixel_format = PIXFORMAT_JPEG;
-    config.frame_size = FRAMESIZE_SVGA; // FRAMESIZE_UXGA;
+    config.pixel_format = PIXFORMAT_JPEG;    //PIXFORMAT_YUV422; //PIXFORMAT_RGB565;
+    config.frame_size = FRAMESIZE_SVGA;      //FRAMESIZE_QVGA 320x240;  FRAMESIZE_SVGA 800x600;
     config.jpeg_quality = 10;
     config.fb_count = 2;
 
