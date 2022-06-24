@@ -7,7 +7,7 @@ Ce dépôt propose des programmes pour tester la carte esp32-cam.
 
 Les programmes sont développés sous Linux Mint avec Netbeans et Platformio.
 
-## ### Camera Specifications
+## Camera Specifications
 
 L'ESP32-CAM comprend une caméra **OV2640**. La carte prend également en charge la caméra OV7670.
 
