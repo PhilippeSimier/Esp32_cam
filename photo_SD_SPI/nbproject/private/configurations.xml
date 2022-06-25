@@ -5,9 +5,9 @@
       <df name="include">
       </df>
       <df name="lib">
-        <df name="MsdCard">
-          <in>MsdCard.cpp</in>
-          <in>MsdCard.h</in>
+        <df name="Camera">
+          <in>Camera.cpp</in>
+          <in>Camera.h</in>
         </df>
       </df>
       <df name="src">
@@ -27,13 +27,13 @@
       </toolsSet>
       <compile>
         <compiledirpicklist>
-          <compiledirpicklistitem>.</compiledirpicklistitem>
           <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
         </compiledirpicklist>
         <compiledir>${AUTO_FOLDER}</compiledir>
         <compilecommandpicklist>
-          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
           <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
         </compilecommandpicklist>
         <compilecommand>${AUTO_COMPILE}</compilecommand>
       </compile>
