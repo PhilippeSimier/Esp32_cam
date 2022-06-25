@@ -2,7 +2,9 @@
 
 ## Introduction
 **ESP32-CAM** est une carte de développement avec une puce ESP32-S, une caméra **OV2640**, un emplacement pour carte microSD et plusieurs GPIO pour connecter des périphériques. Dans cette section, nous examinerons les GPIO ESP32-CAM.
-![brochage](/hardware/Brochage.png)
+![brochage MMC](/hardware/Brochage_MMC.png)
+
+![brochage SPI](/hardware/Brochage_SPI.png)
 
 ## Broches d'alimentation
 
@@ -13,16 +15,16 @@ Il y a aussi  une broche d'alimentation en sortie. Elle délivre une tension de 
 
 ## Connexions de la carte MicroSD
 
-la bibliothèque SD fonctionne sur SPI et le SD_MMC utilise le [bus matériel SDMMC](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sdmmc_host.html) de l'ESP32 . Ainsi, en fonction de la configuration matérielle, vous devez choisir la bonne bibliothèque. Pour la carte ESP32-Cam, vous devez utiliser la bibliothèque  SD_MMC. 
+la bibliothèque SD fonctionne sur SPI et le SD_MMC utilise le [bus matériel SDMMC](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/sdmmc_host.html) de l'ESP32 . Ainsi, en fonction de la configuration matérielle, vous devez choisir la bonne bibliothèque. Pour la carte ESP32-Cam, vous pouvez utiliser la bibliothèque  SD_MMC ou la bibliothèque SD. 
 
-| Carte Micro SD |  ESP32 |
-|-------------------|-----|
-| CLK | GPIO 14 |
-| CMD | GPIO 15 |
-| DONNÉE S0 | GPIO 2 |
-| DATA1 / lampe | GPIO 4 |
-| DONNÉE S2 | GPIO 12 |
-| DONNÉE S3 | GPIO 13 |
+| Micro SD_MMC |  ESP32 | Micro SD SPI |
+|-------------------|-----|----|
+| CLK | GPIO 14 | SCK |
+| CMD | GPIO 15 | MOSI |
+| DONNÉE S0 | GPIO 2 | MISO | 
+| DATA1 / Flash | GPIO 4 | Flash |
+| DONNÉE S2 | GPIO 12 |  |
+| DONNÉE S3 | GPIO 13 | CS |
 
 Comme indiqué ci-dessus, l'ESP32-CAM utilise les broches GPIO GPIO02, GPIO04, GPIO13 et GPIO15 pour lire et écrire des données sur la carte SD. Pour utiliser la carte SD en mode '1-Bit' ou '1-Wire', il suffit d'initialiser la carte SD avec le code suivant (cf. Espressif Arduino core pour l'ESP32) : Le prototype de la méthode begin est :
 ```
@@ -52,6 +54,6 @@ L'ESP32-CAM dispose d'une LED intégrée très lumineuse qui peut fonctionner co
 
 ## LED rouge intégrée (GPIO 33)
 
-À côté du bouton RST, il y a une LED rouge intégrée. Cette LED est connectée en interne àGPIO 33. on peut utiliser cette LED pour indiquer que quelque chose se passe.
+À côté du bouton RST, il y a une LED rouge intégrée. Cette LED est connectée en interne à **GPIO 33**. on peut utiliser cette LED pour indiquer que quelque chose se passe.
 
 Cette LED fonctionne avec une logique inversée, donc vous envoyez un état LOW pour l'allumer et un état HIGHl pour l'éteindre.
