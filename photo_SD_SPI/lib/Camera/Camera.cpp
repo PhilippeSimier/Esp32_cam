@@ -17,6 +17,12 @@ Camera::Camera(const Camera& orig) {
 Camera::~Camera() {
 }
 
+/**
+ * @brief initialise la camera avec un format et une taille d'image
+ * @param pixFormat   YUV422, GRAYSCALE, RGB565, JPEG
+ * @param size        FRAMESIZE_UXGA, QQVGA à UXGA N'utilisez pas de tailles supérieures à QVGA lorsqu'elles ne sont pas au format JPEG
+ * @return            true si tout c'est bien passé
+ */
 bool Camera::init(pixformat_t pixFormat, framesize_t size) {
 
     camera_config_t config;
@@ -41,10 +47,10 @@ bool Camera::init(pixformat_t pixFormat, framesize_t size) {
     config.pin_pwdn = PWDN_GPIO_NUM;
     config.pin_reset = RESET_GPIO_NUM;
     config.xclk_freq_hz = 20000000;
-    config.pixel_format = pixFormat; //PIXFORMAT_YUV422; //PIXFORMAT_RGB565;
-    config.frame_size = size; //FRAMESIZE_QVGA 320x240;  FRAMESIZE_SVGA 800x600;
-    config.jpeg_quality = 10;
-    config.fb_count = 2;
+    config.pixel_format = pixFormat; // PIXFORMAT_YUV422; //PIXFORMAT_RGB565;
+    config.frame_size = size;        // QQVGA-UXGA N'utilisez pas de tailles supérieures à QVGA lorsqu'elles ne sont pas JPEG
+    config.jpeg_quality = 10;        // 0-63 un nombre inférieur signifie une meilleure qualité
+    config.fb_count = 1;             // s'il y en a plusieurs, i2s s'exécute en mode continu. Utiliser uniquement avec JPEG
 
     // Camera init
     esp_err_t err = esp_camera_init(&config);
@@ -107,6 +113,11 @@ bool Camera::init(pixformat_t pixFormat, framesize_t size) {
     return retour;
 }
 
+/**
+ * @brief       Prend une photo et l'enregistre sur la carte SD
+ * @param name  le nom du fichier
+ * @return      true si le fichier est enregistré
+ */
 bool Camera::capturePhotoSaveSD(String name) {
 
     camera_fb_t *fb = NULL;

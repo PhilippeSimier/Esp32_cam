@@ -14,16 +14,16 @@ Camera *laCamera;
 
 void setup() {
     Serial.begin(115200);
-    
-    
+
+
     pinMode(LED_ROUGE, OUTPUT);
     digitalWrite(LED_ROUGE, LOW);
-    
-    
+
     laCamera = new Camera;
-    if (!laCamera->init()){
+
+    if (!laCamera->init(PIXFORMAT_JPEG, FRAMESIZE_SVGA)) {
         Serial.println("Problème Camera ou carte SD");
-        while(1){
+        while (1) {
             delay(1000);
         }
     }
@@ -37,7 +37,7 @@ void loop() {
     laCamera->capturePhotoSaveSD("photo");
     digitalWrite(LED_ROUGE, HIGH);
     delay(2000);
-    
+
     //laCamera->flash(1);
 }
 
