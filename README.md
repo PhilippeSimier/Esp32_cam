@@ -36,7 +36,7 @@ le fichier ``` esp_camera.h``` : donne le prototype des fonctions pour initialis
 
 Lorsqu'on  capture une image avec la caméra, le tampon d'image la contiendra dans le format sélectionné. Attention tous les formats ne sont pas supportés. 
 
- - **~~GRAYSCALE~~** **(non supporté)** signifie des valeurs de 0 à 255 pour chaque pixel 
+ - **GRAYSCALE** signifie des valeurs de 0 à 255 pour chaque pixel 
  - **RGB565** signifie qu'une valeur de 16 bits est par pixel et comprend 5 bits de rouge, 6 bits de vert et 5 bits de bleu.  
  - **~~RGB888~~**  **(non supporté)** signifie qu'il y a 3 octets par pixel, un pour le rouge, un pour le vert et un pour le bleu. Chacun varie entre 0 et 255.  
  - **YUV** signifie que chaque pixel a son canal Y comme un octet séparé (0 à 255) et que chacun des deux pixels adjacents partage ses valeurs U et V. 
