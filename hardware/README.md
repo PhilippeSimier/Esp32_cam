@@ -1,15 +1,22 @@
 ﻿# Guide de brochage ESP32-CAM AI-Thinker
 
 ## Introduction
-**ESP32-CAM** est une carte de développement avec une puce ESP32-S, une caméra **OV2640**, un emplacement pour carte microSD et plusieurs GPIO pour connecter des périphériques. Dans cette section, nous examinerons les GPIO ESP32-CAM.
+**ESP32-CAM** est une carte de développement avec une puce ESP32-S, une caméra **OV2640**, un emplacement pour carte microSD et plusieurs GPIO pour connecter des périphériques. 
+
+Vous découvrirez que la plupart des broches de la carte ESP32-cam sont déjà utilisées par la carte SD et l'interface série pour la programmation. Certaines de ces mauvaises décisions (par exemple, ne pas exposer les broches I2C) paralysent considérablement les applications possibles.
+
+Dans cette section, nous examinerons les GPIO ESP32-CAM.
+
+
 ![brochage MMC](/hardware/Brochage_MMC.png)
 
 ![brochage SPI](/hardware/Brochage_SPI.png)
 
 ## Broches d'alimentation
 
-L'ESP32-CAM est livré avec trois broches de masse (colorées en noir) et une broche d'**alimentation en entrée** (colorée en rouge) 5V.
+L'ESP32-CAM est livré avec trois broches de masse (en noir) et une broche d'**alimentation en entrée** (en rouge) 5V.
 Il y a aussi  une broche d'alimentation en sortie. Elle délivre une tension de  3.3V.
+La consommation de la carte est de **100 mA** environ.
 
 ![alimentation](/hardware/alimentation.png)
 
@@ -49,11 +56,29 @@ Remarque La lampe ne s’allumera pas lors des écritures sur la carte SD.
 
 
 
-## Lampe  (GPIO 4)
+## Led Flash  (GPIO 4)
 L'ESP32-CAM dispose d'une LED intégrée très lumineuse qui peut fonctionner comme un flash lors de la prise de  photos. Cette LED est connectée en interne à GPIO 4.
+Etat logique low correspond à la led Flash éteinte et l'état High à allumée. 
+
+## GPIO12
+La broche GPIO12 peut être **utilisée en sortie**. ne pas utiliser en entrée car il y a échec au démarrage si la résistance de tirage vers le haut est activée. 
+
+## UART2 RX (GPIO16)
+La broche GPIO 16 peut être utilisée en entrée (à vérifier)
+Elle ne peut pas être utilisé en sortie car elle est connectée à une résistance pull-up de 10Kohm au niveau de la PSRAM. Conclusion quand le programme exécute la ligne
+
+```cpp
+digitalWrite(16, LOW);
+```
+le niveau de la ligne GPIO 16 reste au 1 logique !!!
+
+
 
 ## LED rouge intégrée (GPIO 33)
 
 À côté du bouton RST, il y a une LED rouge intégrée. Cette LED est connectée en interne à **GPIO 33**. on peut utiliser cette LED pour indiquer que quelque chose se passe.
 
-Cette LED fonctionne avec une logique inversée, donc vous envoyez un état LOW pour l'allumer et un état HIGHl pour l'éteindre.
+Cette LED **fonctionne avec une logique inversée**, donc vous envoyez un état LOW pour l'allumer et un état HIGH pour l'éteindre.
+
+
+

@@ -15,8 +15,10 @@ Camera *laCamera;
 void setup() {
     Serial.begin(115200);
 
-
     pinMode(LED_ROUGE, OUTPUT);
+    pinMode(12, OUTPUT);
+    pinMode(16, OUTPUT); 
+    
     digitalWrite(LED_ROUGE, LOW);
 
     laCamera = new Camera;
@@ -45,6 +47,8 @@ void setup() {
 
 void loop() {
     digitalWrite(LED_ROUGE, LOW);
+    digitalWrite(12, HIGH);
+    digitalWrite(16, HIGH);
     delay(500);
     if (laCamera->capturePhoto()){      
         laCamera->SaveSD("photo");
@@ -53,6 +57,8 @@ void loop() {
     }
     
     digitalWrite(LED_ROUGE, HIGH);
+    digitalWrite(12, LOW);
+    digitalWrite(16, LOW);
     delay(2000);
 
     //laCamera->flash(1);
