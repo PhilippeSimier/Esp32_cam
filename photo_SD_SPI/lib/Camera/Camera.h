@@ -36,19 +36,30 @@
 
 #define LED_ROUGE 33
 
-
 class Camera {
 public:
     Camera();
     Camera(const Camera& orig);
     virtual ~Camera();
-    
+
     bool init(pixformat_t pixFormat = PIXFORMAT_JPEG, framesize_t size = FRAMESIZE_SVGA);
-    bool capturePhotoSaveSD(String name = "picture");
+    bool SDinit();
+    void vflip();
+    void hmirror();
+    void setContrast(int level);
+    bool SaveSD(String name = "picture");
+    bool capturePhoto();
+    uint8_t * getBuf();
+    size_t getLen();
+    size_t getwidth();
+    size_t getheight();
+    
     void flash(int N);
-    
-    
+
+
 private:
+    camera_fb_t *fb;
+    sensor_t *s;
     int count;
 
 };

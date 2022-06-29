@@ -21,12 +21,24 @@ void setup() {
 
     laCamera = new Camera;
 
-    if (!laCamera->init(PIXFORMAT_JPEG, FRAMESIZE_SVGA)) {
-        Serial.println("Problème Camera ou carte SD");
+    if (!laCamera->init(PIXFORMAT_JPEG, FRAMESIZE_VGA)) {
+        Serial.println("Camera init failed");
         while (1) {
             delay(1000);
         }
     }
+    
+    // laCamera->vflip();
+    // laCamera->hmirror();
+    // laCamera->setContrast(2);
+    
+    if (!laCamera->SDinit()) {
+        Serial.println("SD card init failed");
+        while (1) {
+            delay(1000);
+        }
+    }
+    
     Serial.println("Setup done");
     digitalWrite(LED_ROUGE, HIGH);
 }
@@ -34,7 +46,12 @@ void setup() {
 void loop() {
     digitalWrite(LED_ROUGE, LOW);
     delay(500);
-    laCamera->capturePhotoSaveSD("photo");
+    if (laCamera->capturePhoto()){      
+        laCamera->SaveSD("photo");
+        Serial.printf("len  : %d octets \n",laCamera->getLen());
+        Serial.printf("size : %d x %d \n", laCamera->getwidth(), laCamera->getheight());
+    }
+    
     digitalWrite(LED_ROUGE, HIGH);
     delay(2000);
 
