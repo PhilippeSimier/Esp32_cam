@@ -11,6 +11,7 @@
 
 
 Camera *laCamera;
+int flipflop = 0;
 
 void setup() {
     Serial.begin(115200);
@@ -34,6 +35,7 @@ void setup() {
     // laCamera->hmirror();
     // laCamera->setContrast(2);
     
+    
     if (!laCamera->SDinit()) {
         Serial.println("SD card init failed");
         while (1) {
@@ -48,17 +50,33 @@ void setup() {
 void loop() {
     digitalWrite(LED_ROUGE, LOW);
     digitalWrite(12, HIGH);
-    digitalWrite(16, HIGH);
+    
     delay(500);
+    
+    
     if (laCamera->capturePhoto()){      
         laCamera->SaveSD("photo");
         Serial.printf("len  : %d octets \n",laCamera->getLen());
         Serial.printf("size : %d x %d \n", laCamera->getwidth(), laCamera->getheight());
+        if (flipflop == 0){
+            laCamera->reset(10);
+            laCamera->init( PIXFORMAT_RGB565, FRAMESIZE_SVGA);
+            // laCamera->setFrameSize(FRAMESIZE_SVGA);
+            flipflop = 1;
+            Serial.println("RGB565 SVGA");
+        } else {
+            laCamera->reset(10);
+            laCamera->init( PIXFORMAT_JPEG, FRAMESIZE_VGA);
+            // laCamera->setFrameSize(FRAMESIZE_QVGA);
+            flipflop = 0;
+            Serial.println("JPEG VGA");
+        }
+           
     }
     
     digitalWrite(LED_ROUGE, HIGH);
     digitalWrite(12, LOW);
-    digitalWrite(16, LOW);
+    
     delay(2000);
 
     //laCamera->flash(1);

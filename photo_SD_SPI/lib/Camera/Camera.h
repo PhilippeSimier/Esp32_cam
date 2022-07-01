@@ -44,17 +44,24 @@ public:
 
     bool init(pixformat_t pixFormat = PIXFORMAT_JPEG, framesize_t size = FRAMESIZE_SVGA);
     bool SDinit();
+    
     void vflip();
     void hmirror();
     void setContrast(int level);
+    void setFrameSize(framesize_t framesize);
+    void setFormat(pixformat_t pixFormat);
+   
     bool SaveSD(String name = "picture");
     bool capturePhoto();
+    
     uint8_t * getBuf();
     size_t getLen();
     size_t getwidth();
     size_t getheight();
     
     void flash(int N);
+    
+    void reset(byte tick);
 
 
 private:

@@ -106,6 +106,34 @@ void Camera::setContrast(int level) {
 }
 
 /**
+ * 
+ * @param framesize
+ */
+void Camera::setFrameSize(framesize_t framesize) {
+    s->set_framesize(s, framesize);
+}
+
+void Camera::setFormat(pixformat_t pixFormat) {
+
+    s->set_pixformat(s, pixFormat);
+
+    esp_camera_fb_return(fb);
+
+}
+
+/**
+ * @brief redémarre la camera
+ * @param tick
+ */
+void Camera::reset(byte tick) {
+    esp_camera_deinit();
+    digitalWrite(PWDN_GPIO_NUM, LOW);
+    delay(1);
+    digitalWrite(PWDN_GPIO_NUM, HIGH);
+    delay(tick);
+}
+
+/**
  * @brief initialise le lecteur de carte SD (Bus SPI) et vérifie si une carte est présente
  * @return true si une carte SD est présente
  */
