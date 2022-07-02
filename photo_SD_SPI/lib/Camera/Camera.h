@@ -10,8 +10,7 @@
 
 #include <Arduino.h>
 #include <esp_camera.h>
-#include <soc/soc.h>          // Disable brownour problems
-#include <soc/rtc_cntl_reg.h> // Disable brownour problems
+
 #include <FS.h>     // SD Card ESP32
 #include <SD.h> // SD Card ESP32
 
@@ -49,7 +48,7 @@ public:
     void hmirror();
     void setContrast(int level);
     void setFrameSize(framesize_t framesize);
-    void setFormat(pixformat_t pixFormat);
+
    
     bool SaveSD(String name = "picture", String ext = "jpg");
     bool capturePhoto();

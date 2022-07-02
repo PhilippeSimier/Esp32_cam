@@ -25,6 +25,11 @@ Camera::~Camera() {
 
 /**
  * @brief initialise la camera avec un format et une taille d'image
+ *        Cette fonction détecte et configure la caméra sur l'interface I2C, 
+ *        alloue le framebuffer et les tampons DMA, 
+ *        initialise l'entrée I2S parallèle et configure les descripteurs DMA. 
+ *        Actuellement, cette fonction ne peut être appelée qu'une seule fois et 
+ *        il n'y a aucun moyen de désinitialiser ce module sans passer par un reset camera. 
  * @param pixFormat   YUV422, GRAYSCALE, RGB565, JPEG
  * @param size            FRAMESIZE_QVGA (320 x 240)
  *                        FRAMESIZE_CIF  (352 x 288)
@@ -76,10 +81,6 @@ bool Camera::init(pixformat_t pixFormat, framesize_t size) {
         retour = true;
     }
 
-    // Configuration du flash
-    pinMode(FLASH_GPIO_NUM, OUTPUT);
-    digitalWrite(FLASH_GPIO_NUM, LOW);
-
     return retour;
 }
 
@@ -115,13 +116,6 @@ void Camera::setFrameSize(framesize_t framesize) {
     s->set_framesize(s, framesize);
 }
 
-void Camera::setFormat(pixformat_t pixFormat) {
-
-    s->set_pixformat(s, pixFormat);
-
-    esp_camera_fb_return(fb);
-
-}
 
 /**
  * @brief Resetting camera by power down line

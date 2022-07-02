@@ -9,17 +9,14 @@
 #include <Arduino.h>
 #include <Camera.h>
 
-
 Camera *laCamera;
 int flipflop = 0;
+
 
 void setup() {
     Serial.begin(115200);
 
     pinMode(LED_ROUGE, OUTPUT);
-    pinMode(12, OUTPUT);
-    pinMode(16, OUTPUT);
-
     digitalWrite(LED_ROUGE, LOW);
 
     laCamera = new Camera;
@@ -49,45 +46,39 @@ void setup() {
 
 void loop() {
     digitalWrite(LED_ROUGE, LOW);
-    digitalWrite(12, HIGH);
-
-    delay(500);
-
-
+    
+    
 
     if (flipflop == 0) {
-        laCamera->reset(1);
+        laCamera->reset();
         laCamera->init(PIXFORMAT_RGB565, FRAMESIZE_SVGA);
 
         flipflop = 1;
         Serial.println("RGB565 SVGA");
-        delay(2000);
+        
         if (laCamera->capturePhoto()) {
             laCamera->SaveSD("photo", "565");
             Serial.printf("len  : %d octets \n", laCamera->getLen());
             Serial.printf("size : %d x %d \n", laCamera->getwidth(), laCamera->getheight());
         }
-
+        delay(1000);
 
 
     } else {
-        laCamera->reset(1);
+        laCamera->reset();
         laCamera->init(PIXFORMAT_JPEG, FRAMESIZE_VGA);
-
+        laCamera->hmirror();
+        
         flipflop = 0;
         Serial.println("JPEG VGA");
-        delay(2000);
+        
         if (laCamera->capturePhoto()) {
             laCamera->SaveSD("photo", "jpg");
             Serial.printf("len  : %d octets \n", laCamera->getLen());
             Serial.printf("size : %d x %d \n", laCamera->getwidth(), laCamera->getheight());
         }
+        delay(1000);
     }
-
-
-
-    digitalWrite(LED_ROUGE, HIGH);
-    digitalWrite(12, LOW);
 
 }
 
