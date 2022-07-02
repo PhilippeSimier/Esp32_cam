@@ -51,7 +51,7 @@ public:
     void setFrameSize(framesize_t framesize);
     void setFormat(pixformat_t pixFormat);
    
-    bool SaveSD(String name = "picture");
+    bool SaveSD(String name = "picture", String ext = "jpg");
     bool capturePhoto();
     
     uint8_t * getBuf();
@@ -61,7 +61,7 @@ public:
     
     void flash(int N);
     
-    void reset(byte tick);
+    void reset(byte tick = 1);
 
 
 private:

@@ -13,6 +13,8 @@ Camera::Camera() :
 fb(NULL),
 s(NULL),
 count(0) {
+ 
+    esp_log_level_set("gpio", ESP_LOG_NONE);
 }
 
 Camera::Camera(const Camera& orig) {
@@ -122,11 +124,12 @@ void Camera::setFormat(pixformat_t pixFormat) {
 }
 
 /**
- * @brief redémarre la camera
- * @param tick
+ * @brief Resetting camera by power down line
+ * @param tick nb of ms for delay
  */
 void Camera::reset(byte tick) {
     esp_camera_deinit();
+    Serial.println("Resetting camera by power down line");
     digitalWrite(PWDN_GPIO_NUM, LOW);
     delay(1);
     digitalWrite(PWDN_GPIO_NUM, HIGH);
@@ -195,11 +198,11 @@ bool Camera::SDinit() {
  * @param name  le nom du fichier
  * @return      true si le fichier est enregistré
  */
-bool Camera::SaveSD(String name) {
+bool Camera::SaveSD(String name,  String ext) {
 
     // Path where new picture will be saved in SD Card
 
-    String path = "/" + name + String(count) + ".jpg";
+    String path = "/" + name + String(count) + "." + ext;
     Serial.printf("Picture file name: %s\n", path.c_str());
 
     File file = SDFileSystem.open(path.c_str(), FILE_WRITE);
