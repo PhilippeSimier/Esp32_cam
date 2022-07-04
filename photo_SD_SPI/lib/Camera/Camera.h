@@ -36,9 +36,14 @@
 #define LED_ROUGE 33
 
 class Camera {
+    
 public:
     Camera();
-    Camera(const Camera& orig);
+    // la Camera n'est pas clonable
+    Camera(const Camera& orig) = delete;
+    // la Camera n'est pas assignable
+    void operator=(const Camera &) = delete;
+    
     virtual ~Camera();
 
     bool init(pixformat_t pixFormat = PIXFORMAT_JPEG, framesize_t size = FRAMESIZE_SVGA);

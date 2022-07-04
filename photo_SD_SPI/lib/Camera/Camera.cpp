@@ -17,8 +17,7 @@ count(0) {
     esp_log_level_set("gpio", ESP_LOG_NONE);
 }
 
-Camera::Camera(const Camera& orig) {
-}
+
 
 Camera::~Camera() {
 }
